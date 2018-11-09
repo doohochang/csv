@@ -108,7 +108,12 @@ class CSV(fieldDelimiter: Char, recordDelimiter: Char, trimSpaces: Boolean) {
     else
       (
         trimIfNeeded(string.take(splitIndex)),
-        trimIfNeeded(string.drop(splitIndex + 1))
+        trimIfNeeded(
+          if (string.charAt(splitIndex) == fieldDelimiter)
+            string.drop(splitIndex + 1)
+          else
+            string.drop(splitIndex)
+        )
       )
   }
 
